@@ -8,14 +8,20 @@ class App extends React.Component {
     username: '',
     password: '',
     response: '...',
-    fullname: ''
+    fullname: '',
+    checked: false
   }
   componentDidMount() {
 
   }
 
   handleSubmit = () => {
-    let { username, password } = this.state
+    let { username, password, checked } = this.state
+    if (checked) {
+      username = username.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-')
+      password = password.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-')
+    }
+    console.log({ username, password })
     userServices.login(username, password).then((response) => {
       console.log('res', response)
       let { message, user, isError } = response
@@ -37,18 +43,26 @@ class App extends React.Component {
     this.setState({ password: event.target.value })
   }
 
+  handleCheckbox = () => {
+    let { checked } = this.state
+    this.setState({ checked: !checked })
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <label>
-            Username:
+          <h1>Test SQL Injetion</h1>
+          <div>
+            <span>Username:</span>
             <input type="text" value={this.state.username} onChange={this.handleChangeAccount} />
-          </label>
-          <label>
-            Password:
+          </div>
+          <div>
+            <span>Password:</span>
             <input type="text" value={this.state.password} onChange={this.handlePassword} />
-          </label>
+          </div>
+          <div>Remove Special Character: <input type="checkbox" value={this.state.checkbox} checked={this.state.checked} onChange={this.handleCheckbox} /></div>
+
           <div>
             <button onClick={this.handleSubmit}>LOGIN</button>
           </div>
