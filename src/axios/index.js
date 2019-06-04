@@ -56,7 +56,8 @@ class AxiosClass {
     }
     interceptorsError = (error) => {
         const { response, request } = error
-        console.log('interceptorsError', error.response)
+        console.log('interceptorsError', error)
+        alert(error)
         if (response) {
             this.handleErrorReponse(error);
         }

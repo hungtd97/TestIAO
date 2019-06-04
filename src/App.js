@@ -26,13 +26,13 @@ class App extends React.Component {
       console.log('res', response)
       let { message, user, isError } = response
       if (isError) {
-        this.setState({ response: `${message}` })
+        this.setState({ response: `${message}`, fullname: '' })
       } else {
-        this.setState({ response: message, fullname: user.username })
+        this.setState({ response: message, fullname: `Full Name: ${user.username}` })
       }
     }).catch((err) => {
       console.log('erer', err)
-      this.setState({ response: 'er' })
+      this.setState({ response: 'SERVER ERROR', fullname: '' })
     })
   }
 
@@ -52,24 +52,27 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" width="120px" />
           <h1>Test SQL Injetion</h1>
-          <div>
+          <div class="input-box">
             <span>Username:</span>
             <input type="text" value={this.state.username} onChange={this.handleChangeAccount} />
           </div>
-          <div>
+          <div class="input-box">
             <span>Password:</span>
             <input type="text" value={this.state.password} onChange={this.handlePassword} />
           </div>
           <div>Remove Special Character: <input type="checkbox" value={this.state.checkbox} checked={this.state.checked} onChange={this.handleCheckbox} /></div>
 
-          <div>
+          <div class="submit-box">
             <button onClick={this.handleSubmit}>LOGIN</button>
           </div>
           <div>
             <h3>Server Response</h3>
-            <div>{this.state.response}</div>
-            <div>{this.state.fullname}</div>
+            <div class="response-box">
+              <div><small>{this.state.response}</small></div>
+              <div>{this.state.fullname}</div>
+            </div>
           </div>
         </header>
       </div>

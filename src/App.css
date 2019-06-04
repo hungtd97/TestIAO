@@ -4,21 +4,42 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-image: linear-gradient(to right, #4b6cb7 , #182848);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  align-items: center;
   /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
+.input-box{
+  padding: 15px 0;
+}
+
+.submit-box{
+  margin-top: 15px;
+}
+
+span {
+  padding-right: 15px;
+}
+
+button {
+  font-size: 19px;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.response-box{
+  border-top: 1px solid grey;
+}
 input{
   height: 25px;
   border-radius: 15px;
