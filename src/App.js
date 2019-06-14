@@ -28,7 +28,7 @@ class App extends React.Component {
       if (isError) {
         this.setState({ response: `${message}`, fullname: '' })
       } else {
-        this.setState({ response: message, fullname: `Full Name: ${user.username}` })
+        this.setState({ response: message, fullname: `Full Name: ${user.name}` })
       }
     }).catch((err) => {
       console.log('erer', err)
@@ -56,11 +56,11 @@ class App extends React.Component {
           <h1>Test SQL Injetion</h1>
           <div class="input-box">
             <span>Username:</span>
-            <input type="text" value={this.state.username} onChange={this.handleChangeAccount} />
+            <input type="text" value={this.state.username} onChange={this.handleChangeAccount} required />
           </div>
           <div class="input-box">
             <span>Password:</span>
-            <input type="text" value={this.state.password} onChange={this.handlePassword} />
+            <input type="text" value={this.state.password} onChange={this.handlePassword} required />
           </div>
           <div>Remove Special Character: <input type="checkbox" value={this.state.checkbox} checked={this.state.checked} onChange={this.handleCheckbox} /></div>
 

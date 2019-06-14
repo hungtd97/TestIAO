@@ -14,7 +14,7 @@ const AXIOS_CONFIG = {
     timeout: 15000,
     headers: {
         // 'Accept-Language': 'en-US,en;q=0.9,vi;q=0.8,ja;q=0.7',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
         // 'Accept': 'application/json'
     }
 }
@@ -46,9 +46,9 @@ class AxiosClass {
         return this.app.get(url, body)
     }
     interceptorsResponse = (response) => {
-        let { resultCode, message, success } = response.data
+        let {  message, success } = response.data
         // console.log('response', response.data)
-        if (success === true || resultCode == 200) {
+        if (success === true || response.status == 200) {
             return response.data
         } else {
             return Promise.reject(response)
