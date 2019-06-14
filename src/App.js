@@ -36,6 +36,28 @@ class App extends React.Component {
     })
   }
 
+
+  handleSubmit2 = () => {
+    let { username, password, checked } = this.state
+    if (checked) {
+      username = username.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-')
+      password = password.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-')
+    }
+    console.log({ username, password })
+    userServices.login2(username, password).then((response) => {
+      console.log('res', response)
+      let { message, user, isError } = response
+      if (isError) {
+        this.setState({ response: `${message}`, fullname: '' })
+      } else {
+        this.setState({ response: message, fullname: `Full Name: ${user.name}` })
+      }
+    }).catch((err) => {
+      console.log('erer', err)
+      this.setState({ response: 'SERVER ERROR', fullname: '' })
+    })
+  }
+
   handleChangeAccount = (event) => {
     this.setState({ username: event.target.value })
   }
@@ -67,6 +89,11 @@ class App extends React.Component {
           <div class="submit-box">
             <button onClick={this.handleSubmit}>LOGIN</button>
           </div>
+
+          <div class="submit-box">
+            <button onClick={this.handleSubmit2}>LOGIN WITH PREPARED STATEMENT</button>
+          </div>
+          
           <div>
             <h3>Server Response</h3>
             <div class="response-box">
